@@ -1,0 +1,21 @@
+hash: a50abbf0769838c3d94deba4c500a75d0367d7a65908fb329dee8ce1746d82f9
+updated: 2017-06-19T10:40:26.984867202+02:00
+imports:
+- name: github.com/eclipse/paho.mqtt.golang
+  version: 45f9b18f4864c81d49c3ed01e5faec9eeb05de31
+  subpackages:
+  - packets
+- name: github.com/kardianos/osext
+  version: ae77be60afb1dcacde03767a8c37337fad28ac14
+- name: github.com/pkg/errors
+  version: 645ef00459ed84a119197bfb8d8205042c6df63d
+- name: github.com/satori/go.uuid
+  version: 879c5887cd475cd7864858769793b2ceb0d44feb
+- name: github.com/vharitonsky/iniflags
+  version: 643132d9585eb6cfdf0dd4d6651a0a94c729094c
+- name: golang.org/x/net
+  version: dd2d9a67c97da0afa00d5726e28086007a0acce5
+  subpackages:
+  - proxy
+  - websocket
+testImports: []
