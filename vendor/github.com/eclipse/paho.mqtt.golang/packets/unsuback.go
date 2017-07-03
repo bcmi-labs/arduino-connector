@@ -13,8 +13,7 @@ type UnsubackPacket struct {
 }
 
 func (ua *UnsubackPacket) String() string {
-	str := fmt.Sprintf("%s", ua.FixedHeader)
-	str += " "
+	str := fmt.Sprintf("%s\n", ua.FixedHeader)
 	str += fmt.Sprintf("MessageID: %d", ua.MessageID)
 	return str
 }
@@ -31,10 +30,8 @@ func (ua *UnsubackPacket) Write(w io.Writer) error {
 
 //Unpack decodes the details of a ControlPacket after the fixed
 //header has been read
-func (ua *UnsubackPacket) Unpack(b io.Reader) error {
+func (ua *UnsubackPacket) Unpack(b io.Reader) {
 	ua.MessageID = decodeUint16(b)
-
-	return nil
 }
 
 //Details returns a Details struct containing the Qos and

@@ -13,9 +13,8 @@ type PubackPacket struct {
 }
 
 func (pa *PubackPacket) String() string {
-	str := fmt.Sprintf("%s", pa.FixedHeader)
-	str += " "
-	str += fmt.Sprintf("MessageID: %d", pa.MessageID)
+	str := fmt.Sprintf("%s\n", pa.FixedHeader)
+	str += fmt.Sprintf("messageID: %d", pa.MessageID)
 	return str
 }
 
@@ -31,10 +30,8 @@ func (pa *PubackPacket) Write(w io.Writer) error {
 
 //Unpack decodes the details of a ControlPacket after the fixed
 //header has been read
-func (pa *PubackPacket) Unpack(b io.Reader) error {
+func (pa *PubackPacket) Unpack(b io.Reader) {
 	pa.MessageID = decodeUint16(b)
-
-	return nil
 }
 
 //Details returns a Details struct containing the Qos and
