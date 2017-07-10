@@ -15,7 +15,6 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/davecgh/go-spew/spew"
 	mqtt "github.com/eclipse/paho.mqtt.golang"
 	"github.com/kardianos/osext"
 	"github.com/namsral/flag"
@@ -136,9 +135,6 @@ func UploadCB(status *Status) mqtt.MessageHandler {
 			status.Error("/upload/get", errors.Wrapf(err, "unmarshal %s", msg.Payload()))
 			return
 		}
-
-		spew.Dump(msg.Payload())
-		spew.Dump(info)
 
 		// create folder
 		folder, err := osext.ExecutableFolder()

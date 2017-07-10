@@ -1,0 +1,10 @@
+package: github.com/bcmi-labs/arduino-connector
+import:
+- package: github.com/eclipse/paho.mqtt.golang
+  version: ^1.0.0
+- package: github.com/kardianos/osext
+- package: github.com/pkg/errors
+  version: ^0.8.0
+- package: github.com/satori/go.uuid
+  version: ^1.1.0
+- package: github.com/vharitonsky/iniflags
