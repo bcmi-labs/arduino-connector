@@ -201,7 +201,7 @@ func GetSketchFolder() (string, error) {
 	folder, err := osext.ExecutableFolder()
 	folder = filepath.Join(folder, "sketches")
 	if _, err := os.Stat(folder); os.IsNotExist(err) {
-		err = os.Mkdir(folder, 0644)
+		err = os.Mkdir(folder, 0755)
 	}
 	return folder, err
 }
@@ -211,7 +211,7 @@ func GetSketchDBFolder() (string, error) {
 	folder, err := GetSketchFolder()
 	folder = filepath.Join(folder, "db")
 	if _, err := os.Stat(folder); os.IsNotExist(err) {
-		err = os.Mkdir(folder, 0644)
+		err = os.Mkdir(folder, 0755)
 	}
 	return folder, err
 }
