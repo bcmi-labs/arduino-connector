@@ -278,7 +278,7 @@ func addWatcherForManuallyAddedSketches(folderOrigin, folderDest string, status 
 							break
 						}
 					}
-					os.Chmod(filename, 0755)
+					os.Chmod(filename, 0700)
 					log.Println("Moving new sketch to sketches folder")
 					fileInfo, err := os.Stat(filename)
 					if err != nil {
