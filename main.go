@@ -187,7 +187,7 @@ func (p program) run() {
 		}
 	}
 
-	os.Mkdir("/tmp/sketches", 0777)
+	os.Mkdir("/tmp/sketches", 0700)
 
 	go addWatcherForManuallyAddedSketches("/tmp/sketches", sketchFolder, status)
 
