@@ -21,3 +21,18 @@ The Arduino Connector is tied to a specific device registered within the Arduino
 Make sure you have an Arduino Account and you are able to log at: https://auth.arduino.cc/login
 
 Please write us at auth@arduino.cc if you encounter any issue loggin in and you need support.
+
+
+## Compile
+```
+go get github.com/arduino/arduino-connector
+go build -ldflags "-X main.version=$VERSION" github.com/arduino/arduino-connector
+```
+
+## Autoupdate
+```
+go get github.com/sanbornm/go-selfupdate
+./bin/go-selfupdate arduino-connector $VERSION
+# scp -r public/* user@server:/var/www/files/arduino-connector
+```
+
