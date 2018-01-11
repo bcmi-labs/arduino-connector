@@ -54,6 +54,8 @@ type Config struct {
 	HTTPProxy  string
 	HTTPSProxy string
 	ALLProxy   string
+	updateUrl  string
+	appName    string
 	AuthURL    string
 	APIURL     string
 	updateUrl  string

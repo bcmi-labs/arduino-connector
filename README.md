@@ -22,6 +22,20 @@ Make sure you have an Arduino Account and you are able to log at: https://auth.a
 
 Please write us at auth@arduino.cc if you encounter any issue loggin in and you need support.
 
+
+## Compile
+```
+go get github.com/arduino/arduino-connector
+go build -ldflags "-X main.version=$VERSION" github.com/arduino/arduino-connector
+```
+
+## Autoupdate
+```
+go get github.com/sanbornm/go-selfupdate
+./bin/go-selfupdate arduino-connector $VERSION
+# scp -r public/* user@server:/var/www/files/arduino-connector
+```
+
 ### API
 
 To control the arduino-connector you must have:
