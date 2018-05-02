@@ -426,3 +426,16 @@ go get github.com/sanbornm/go-selfupdate
 # scp -r public/* user@server:/var/www/files/arduino-connector
 ```
 
+## Development
+
+To hack on this project, get it with:
+
+```
+go get github.com/arduino/arduino-connector
+```
+
+You can then build it with:
+
+```
+go build
+```
