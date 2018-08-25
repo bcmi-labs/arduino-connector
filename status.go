@@ -25,8 +25,8 @@ import (
 	"strconv"
 	"time"
 
-	mqtt "github.com/eclipse/paho.mqtt.golang"
 	docker "github.com/docker/docker/client"
+	mqtt "github.com/eclipse/paho.mqtt.golang"
 	"github.com/pkg/errors"
 )
 
@@ -65,10 +65,10 @@ type Endpoint struct {
 // NewStatus creates a new status that publishes on a topic
 func NewStatus(id string, mqttClient mqtt.Client, dockerClient docker.APIClient) *Status {
 	return &Status{
-		id:         id,
-		mqttClient: mqttClient,
+		id:           id,
+		mqttClient:   mqttClient,
 		dockerClient: dockerClient,
-		Sketches:   map[string]*SketchStatus{},
+		Sketches:     map[string]*SketchStatus{},
 	}
 }
 
@@ -161,7 +161,7 @@ func (s *Status) InfoCommandOutput(topic string, out []byte) {
 	info := response{Output: string(out)}
 	data, err := json.Marshal(info)
 	if err != nil {
-		s.Error(topic, fmt.Errorf("Json marshal result: %s", err))
+		s.Error(topic, fmt.Errorf("json marshal result: %s", err))
 		return
 	}
 
