@@ -720,12 +720,14 @@ chmod +x install.sh
 ```
 
 ## run integration tests with vagrant
-please note that:
+
+Please note that the following resources must be manually created in your Arduino Cloud environment:
 * the thing `devops-test:75b87fe3-169d-4603-a018-7fde9c667850`
 * the iot IAM policy `DevicePolicy`
 * the arduino user `devops-test`
 * the s3 bucket `arduino-tmp`
-are resources that must be manually created in the Arduino Cloud environment, in order to replicate the testing, you will need to create those resources on your environment and edit the test setup/teardown scripts:
+
+Then you need to edit the test setup/teardown scripts:
 * `upload_dev_artifacts_on_s3.sh`
 * `create_iot_device.sh`
 * `teardown_dev_artifacts.sh`
