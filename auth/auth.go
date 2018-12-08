@@ -141,6 +141,7 @@ func (c *Config) Refresh(token string) (*Token, error) {
 		return nil, err
 	}
 
+	defer res.Body.Close()
 	body, err := ioutil.ReadAll(res.Body)
 	if err != nil {
 		return nil, err
@@ -228,6 +229,7 @@ func (c *Config) authenticate(client *http.Client, cookies cookies, uri, user, p
 
 	if res.StatusCode != 302 {
 		body, _ := ioutil.ReadAll(res.Body)
+		res.Body.Close()
 		errs := errorRE.FindStringSubmatch(string(body))
 		if len(errs) < 2 {
 			return "", errors.New("status = " + res.Status + ", response = " + string(body))
@@ -250,6 +252,7 @@ func (c *Config) authenticate(client *http.Client, cookies cookies, uri, user, p
 		return "", err
 	}
 
+	defer res.Body.Close()
 	redir, err := url.Parse(res.Header.Get("Location"))
 	if err != nil {
 		return "", err
@@ -277,6 +280,7 @@ func (c *Config) requestToken(client *http.Client, code string) (*Token, error) 
 		return nil, err
 	}
 
+	defer res.Body.Close()
 	body, err := ioutil.ReadAll(res.Body)
 	if err != nil {
 		return nil, err
