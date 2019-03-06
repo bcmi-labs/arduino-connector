@@ -83,7 +83,7 @@
 
 [[constraint]]
   name = "github.com/shirou/gopsutil"
-  version = "2.18.7"
+  version = "2.19.02"
 
 [[constraint]]
   branch = "master"
