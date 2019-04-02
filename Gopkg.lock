@@ -478,7 +478,7 @@
   version = "v1.2.0"
 
 [[projects]]
-  digest = "1:23d963778896113e7cece2666264009d0f558418a0b4971708e2001b6d1dd794"
+  digest = "1:e85bfe279db3f72e8f38f7141690ecfd51afbc7065e4a0fe9252fc9870cc39ff"
   name = "github.com/shirou/gopsutil"
   packages = [
     "host",
@@ -486,8 +486,8 @@
     "process",
   ]
   pruneopts = "NUT"
-  revision = "8048a2e9c5773235122027dd585cf821b2af1249"
-  version = "v2.18.07"
+  revision = "2cbc9195c892b304060269ef280375236d2fcac9"
+  version = "v2.19.03"
 
 [[projects]]
   digest = "1:01252cd79aac70f16cac02a72a1067dd136e0ad6d5b597d0129cf74c739fd8d1"
