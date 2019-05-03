@@ -526,7 +526,7 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:9ab73c6afa8b3245d321adfe5232df92f404389733e69962e78204322daec8ee"
+  digest = "1:59d452cb8b29548499aac98e4282ba7f07f99995163ed02ca6d2cb0514d90fdd"
   name = "golang.org/x/net"
   packages = [
     "context",
@@ -536,7 +536,7 @@
     "websocket",
   ]
   pruneopts = "NUT"
-  revision = "922f4815f713f213882e8ef45e0d315b164d705c"
+  revision = "7f726cade0ab7c929c16ce0b5b25bd201e25f39f"
 
 [[projects]]
   branch = "master"
