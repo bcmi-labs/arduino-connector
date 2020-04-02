@@ -478,16 +478,19 @@
   version = "v1.2.0"
 
 [[projects]]
-  digest = "1:23d963778896113e7cece2666264009d0f558418a0b4971708e2001b6d1dd794"
+  digest = "1:6167d886bb7e4d15a1a6ef74f0f6c2a192092c04876a244702842ca07097f708"
   name = "github.com/shirou/gopsutil"
   packages = [
+    "cpu",
     "host",
     "internal/common",
+    "mem",
+    "net",
     "process",
   ]
   pruneopts = "NUT"
-  revision = "8048a2e9c5773235122027dd585cf821b2af1249"
-  version = "v2.18.07"
+  revision = "53cec6b37e6a2fa787e771c706f7c1fd67ec40f1"
+  version = "v2.20.3"
 
 [[projects]]
   digest = "1:01252cd79aac70f16cac02a72a1067dd136e0ad6d5b597d0129cf74c739fd8d1"
