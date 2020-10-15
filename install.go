@@ -35,6 +35,7 @@ import (
 	"net"
 	"net/http"
 	"os"
+	"os/exec"
 	"path/filepath"
 	"strings"
 	"time"
@@ -44,27 +45,90 @@ import (
 	"github.com/facchinm/service"
 	"github.com/kardianos/osext"
 	"github.com/pkg/errors"
+	"github.com/spf13/viper"
 )
 
 const (
 	rsaBits = 2048
+
+	configDirectory = "/opt/arduino-connector/"
 )
 
 // Install installs the program as a service
-func install(s service.Service) {
-	// InstallService
+func install(s service.Service) error {
 	err := s.Install()
 	// TODO: implement a fallback strtegy if service installation fails
 	check(err, "InstallService")
+
+	if err := createConfig(); err != nil {
+		return err
+	}
+
+	return nil
 }
 
-func createConfigFolder() error {
-	err := os.Mkdir("/etc/arduino-connector/", 0755)
+// createConfig creates yml file where will be stored what arduino-connector install
+func createConfig() error {
+	err := createConfigFolder()
+	if err != nil {
+		fmt.Println(err)
+		return err
+	}
+
+	value, err := isDockerInstalled()
+	if err != nil {
+		return err
+	}
+
+	viper.Set("docker-installed", value)
+	viper.Set("docker-images", []string{})
+	viper.Set("docker-container", []string{})
+	viper.Set("network-manager-installed", isNetManagerInstalled())
+
+	err = viper.WriteConfigAs(filepath.Join(configDirectory, "arduino-connector.yml"))
 	if err != nil {
 		return err
 	}
 
 	return nil
+}
+
+// createConfigFolder creates folder where config yml are stored
+func createConfigFolder() error {
+	err := os.Mkdir(configDirectory, 0755)
+	if err != nil {
+		fmt.Println(err)
+		return err
+	}
+
+	return nil
+}
+
+func isDockerInstalled() (bool, error) {
+	_, err := exec.LookPath("docker")
+	if err == nil {
+		return true, nil
+	}
+
+	return false, nil
+}
+
+func isNetManagerInstalled() bool {
+	cmd := exec.Command("bash", "-c", "dpkg --get-selections | grep network-manager")
+	out, _ := cmd.CombinedOutput()
+	return !strings.Contains(string(out), "deinstall") && len(out) != 0
+}
+
+func updateConfigWithContainer(c string) {
+	cs := viper.GetStringSlice("docker-container")
+	cs = append(cs, c)
+	viper.Set("docker-container", cs)
+}
+
+func updateConfigWithImage(i string) {
+	is := viper.GetStringSlice("docker-images")
+	is = append(is, i)
+	viper.Set("docker-images", is)
 }
 
 // Register creates the necessary certificates and configuration files

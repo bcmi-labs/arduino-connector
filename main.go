@@ -38,12 +38,11 @@ import (
 	"github.com/nats-io/gnatsd/logger"
 	"github.com/nats-io/gnatsd/server"
 	"github.com/nats-io/go-nats"
-
 	"github.com/pkg/errors"
 )
 
 const (
-	defaultConfigFile = "/etc/arduino-connector/arduino-connector.cfg"
+	defaultConfigFile = "/opt/arduino-connector/arduino-connector.cfg"
 )
 
 var (
@@ -89,7 +88,6 @@ func (c Config) String() string {
 func main() {
 	fmt.Println("Version: " + version)
 
-	// Read config
 	config := Config{}
 
 	var doLogin = flag.Bool("login", false, "Do the login and prints out a temporary token")
@@ -103,7 +101,7 @@ func main() {
 	flag.StringVar(&config.appName, "appName", "arduino-connector", "")
 
 	var configFile = flag.String(flag.DefaultConfigFlagname, "", "path to config file")
-	flag.StringVar(&config.CertPath, "cert_path", "/etc/arduino-connector/", "path to store certificates")
+	flag.StringVar(&config.CertPath, "cert_path", "/opt/arduino-connector/", "path to store certificates")
 	flag.StringVar(&config.SketchesPath, "sketches_path", "", "path to store sketches")
 	flag.StringVar(&config.ID, "id", "", "id of the thing in aws iot")
 	flag.StringVar(&config.URL, "url", "", "url of the thing in aws iot")
@@ -134,7 +132,6 @@ func main() {
 
 	fmt.Printf("current configuration: %+v\n", config)
 
-	// Create service and install
 	s, err := createService(config, *configFile, *listenFile)
 	check(err, "CreateService")
 
@@ -151,10 +148,6 @@ func main() {
 	}
 
 	if *doRegister {
-		err = createConfigFolder()
-		if err != nil {
-			panic(err)
-		}
 		register(config, *configFile, *token)
 	}
 
@@ -175,8 +168,10 @@ func main() {
 	}
 
 	if *doInstall {
-		install(s)
-		// install should return cleanly if succeeded
+		if err = install(s); err != nil {
+			panic(err)
+		}
+
 		os.Exit(0)
 	}
 
@@ -201,6 +196,7 @@ func (p program) run() {
 	// - http.DefaultTransport can use the proxy settings
 	// - any spawned sketch process'es also have access to them
 	// Note, all_proxy will not be used by any HTTP/HTTPS connections.
+
 	p.exportProxyEnvVars()
 	p.exportConfigWhitelistedEnvVars()
 
@@ -302,7 +298,8 @@ func (p program) run() {
 	}
 
 	err = os.Mkdir("/tmp/sketches", 0700)
-	if err != nil {
+	if err != nil && !strings.Contains(err.Error(), "file exists") {
+		fmt.Println(err)
 		return
 	}
 
@@ -324,10 +321,10 @@ func autospawnSketchIfMatchesName(name string, status *Status) {
 }
 
 func subscribeTopics(mqttClient mqtt.Client, id string, status *Status) {
-	// Subscribe to topics endpoint
 	if status == nil {
 		return
 	}
+
 	subscribeTopic(mqttClient, id, "/status/post", status, status.StatusEvent, false)
 	subscribeTopic(mqttClient, id, "/upload/post", status, status.UploadEvent, true)
 	subscribeTopic(mqttClient, id, "/sketch/post", status, status.SketchEvent, true)
@@ -352,6 +349,8 @@ func subscribeTopics(mqttClient mqtt.Client, id string, status *Status) {
 	subscribeTopic(mqttClient, id, "/containers/images/post", status, status.ContainersListImagesEvent, false)
 	subscribeTopic(mqttClient, id, "/containers/action/post", status, status.ContainersActionEvent, true)
 	subscribeTopic(mqttClient, id, "/containers/rename/post", status, status.ContainersRenameEvent, true)
+
+	subscribeTopic(mqttClient, id, "/status/uninstall/post", status, status.Uninstall, true)
 }
 
 func subscribeTopic(client mqtt.Client, id, topic string, s *Status, statusHandler mqtt.MessageHandler, isWriteFsRequiredForTopic bool) {

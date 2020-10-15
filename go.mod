@@ -10,7 +10,6 @@ require (
 	github.com/arduino/go-apt-client v0.0.0-20180125162211-1e18c69bac9f
 	github.com/arduino/go-system-stats v0.0.0-20180215112344-1598cba505aa
 	github.com/arduino/gonetworkmanager v0.0.0-20180822160505-c0a58e05a154 // indirect
-	github.com/beorn7/perks v0.0.0-20180321164747-3a771d992973 // indirect
 	github.com/blang/semver v3.5.1+incompatible
 	github.com/containerd/continuity v0.0.0-20181003075958-be9bd761db19 // indirect
 	github.com/docker/cli v0.0.0-20180905184309-44371c7c34d5
@@ -26,7 +25,6 @@ require (
 	github.com/fsnotify/fsnotify v1.4.7
 	github.com/go-ole/go-ole v1.2.1 // indirect
 	github.com/godbus/dbus v4.1.0+incompatible // indirect
-	github.com/gogo/protobuf v1.1.1 // indirect
 	github.com/google/go-cmp v0.4.0 // indirect
 	github.com/gorilla/context v1.1.1 // indirect
 	github.com/gorilla/mux v1.6.2 // indirect
@@ -34,7 +32,6 @@ require (
 	github.com/kardianos/osext v0.0.0-20170510131534-ae77be60afb1
 	github.com/kr/binarydist v0.1.0
 	github.com/kr/pty v1.1.2
-	github.com/matttproud/golang_protobuf_extensions v1.0.1 // indirect
 	github.com/namsral/flag v1.7.4-pre
 	github.com/nats-io/gnatsd v1.2.0
 	github.com/nats-io/go-nats v1.5.0
@@ -43,14 +40,11 @@ require (
 	github.com/opencontainers/go-digest v1.0.0-rc1 // indirect
 	github.com/opencontainers/image-spec v1.0.1 // indirect
 	github.com/opencontainers/runc v0.1.1 // indirect
-	github.com/pkg/errors v0.8.0
-	github.com/prometheus/client_golang v0.9.0-pre1 // indirect
-	github.com/prometheus/common v0.0.0-20180801064454-c7de2306084e // indirect
-	github.com/prometheus/procfs v0.0.0-20181004131639-6bfc2c70c4ee // indirect
+	github.com/pkg/errors v0.8.1
 	github.com/satori/go.uuid v1.2.0 // indirect
 	github.com/shirou/gopsutil v2.17.13-0.20180801053943-8048a2e9c577+incompatible
 	github.com/shirou/w32 v0.0.0-20160930032740-bb4de0191aa4 // indirect
-	github.com/sirupsen/logrus v1.1.0 // indirect
+	github.com/spf13/viper v1.7.1
 	github.com/stretchr/testify v1.3.0
 	golang.org/x/crypto v0.0.0-20200622213623-75b288015ac9
 	golang.org/x/net v0.0.0-20200707034311-ab3426394381
